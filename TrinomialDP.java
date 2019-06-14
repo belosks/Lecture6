@@ -24,20 +24,18 @@ public class TrinomialDP {
 			
 			int n = Integer.parseInt(args[0]);
 			int k = Integer.parseInt(args[1]);
-			
+			// Returns value of Binomial Coefficient C(n, k) 
 			long[][] trinomial = new long[n+1][k+1];
 			trinomial[0] [0]= 1;
 			
-			if ( (k<-n) || (k>n) ) {
-				
-				System.out.println(0);
-				
-			}
-			else {
-			for (int i = 1; i <= n; i++){
-				for(int j = 1; j <= k; j++){
-					trinomial [i][j]=trinomial[i-1][j-1] + trinomial[i-1][j] + trinomial[i-1][j+1];
-				}
+			
+			for (int i = 0; i <= n; i++){
+				for(int j = 1; j <= min(i,k); j++){
+					
+					if (j == 0 || j == i)  trinomial [i][j] = 1;        
+            			// Calculate value using previously stored values 
+           				 else trinomial[i][j] = trinomial[i-1][j-1] + trinomial[i-1][j]; 
+					}
 			} 
 			System.out.println(trinomial[n][k]);
 		}
